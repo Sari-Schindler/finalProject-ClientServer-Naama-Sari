@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { usersRouter } from './routes/usersRoute.js'
+import usersRouter from './routes/usersRoute.js';
 // import { postRouter } from './router/postRouter.js'
 // import { todoRouter } from './router/todoRouter.js'
 // import { commentRouter } from './router/commentRouter.js'

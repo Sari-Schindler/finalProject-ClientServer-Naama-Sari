@@ -29,4 +29,4 @@ usersRouter.put("/:id",validateUserData,(req, res, next)=>{
     next();}, userscontroller.updateUser);
 usersRouter.get("/:id/todos", userscontroller.getUsersTodos);
 
-export default usersRouter
+export default usersRouter; 
