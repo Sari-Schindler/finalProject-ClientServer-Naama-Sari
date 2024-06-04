@@ -12,11 +12,11 @@ function RegisterForm(props) {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/nextID");
+      const response = await fetch("http://localhost:8080/nextID");
       const json = await response.json();
       const { nextUserId } = json[0];
 
-      await fetch("http://localhost:3000/nextID/1", {
+      await fetch("http://localhost:8080/nextID/1", {
         method: "PATCH",
         body: JSON.stringify({
           "nextUserId": nextUserId + 1

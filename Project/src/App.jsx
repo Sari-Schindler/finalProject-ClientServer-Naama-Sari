@@ -1,39 +1,38 @@
-import React, { createContext, useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import './App.css'; 
-import FailToLoadPage from './Pages/FailToLoadPage.jsx'
-import Login from './Pages/Login.jsx'
-import Register from './Pages/Register.jsx'
-import Home from './Pages/Home.jsx'
-// import Todos from './Pages/Todos/Todos.jsx'
-// import Photos from './Pages/Photos/Photos.jsx'
-// import Albums from './Pages/Albums/Albums.jsx'
-// import Posts from './Pages/Posts/Posts.jsx'
-import Info from './Pages/Info.jsx'
-export const UserContext = createContext();
+import express from "express";
+import 'dotenv/config';
+import morgan from 'morgan';
+import fs from 'fs';
+import path from 'path';
+// import usersRouter from "./routes/usersRoute.js";
+// import albumsRouter from "./routes/albumsRoute.js";
+// import commentsRouter from "./routes/commentsRoute.js";
+// import photosRouter from "./routes/photosRoute.js";
+// import postsRouter from "./routes/postsRoute.js";
+// import todosRouter from "./routes/todosRoute.js";
+import loginRouter from "./routes/loginRoute.js";
+// import registerRouter from "./routes/registerRoute.js";
+// import cors from "cors";
+// import authenticateToken from "./middleware/authenticateToken.js";
 
-function App() {
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("User")))
-  const currentPage = currentUser ? `/users/${currentUser.id}/home` : "/login";
-  return (
-    <>
-      <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navigate to={currentPage} />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="users/:userId/home" element={<Home />}>
-              {/* <Route path='todos' element={<Todos />} />
-              <Route path='posts' element={<Posts />} />
-              <Route path='albums' element={<Albums />} />
-              <Route path='albums/:albumId/photos' element={<Photos />} />
-              <Route path='info' element={<Info />} /> */}
-            </Route>
-            <Route path="*" element={<FailToLoadPage />} />
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
-    </>
-  )
-} export default App
+const app = express();
+
+// const accessLogStream = fs.createWriteStream(path.join(process.cwd(), 'access.log'), { flags: 'a' });
+// app.use(morgan('combined', { stream: accessLogStream }));
+// Other middleware
+// app.use(cors());
+app.use(express.json());
+
+// Routes
+
+app.use("/login", loginRouter);
+// app.use("/register", registerRouter);
+// app.use(authenticateToken);
+// app.use("/users", usersRouter);
+// app.use("/todos", todosRouter);
+// app.use("/posts", postsRouter);
+// app.use("/comments", commentsRouter);
+// app.use("/albums", albumsRouter);
+// app.use("/photos", photosRouter);
+
+// Starting the server
+app.listen(process.env.PORT, () => console.log(`listening on port: ${process.env.PORT}`));
