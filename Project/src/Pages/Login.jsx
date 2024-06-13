@@ -10,7 +10,7 @@ function Login() {
         let userName = event.target[0].value;
         let password = event.target[1].value;
         console.log(userName)
-        fetch(`http://localhost:8080/access?UserName=${userName}`)
+        fetch(`http://localhost:8080/users?UserName=${userName}`)
             .then(response => response.json())
             .then(response => response.length === 0 ? alert("No such user. Please register") : successLogin(response[0]))
             .catch(error => console.error("Error during login:", error));

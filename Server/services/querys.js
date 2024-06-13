@@ -1,7 +1,7 @@
 function getByIdQuery(table_name, column_name, isSoftDeletedRecord = false) {
     let query;
     if (isSoftDeletedRecord)
-        query = `SELECT * FROM ${table_name} WHERE ${column_name} = ? AND is_deleted = false`;
+        query = `SELECT * FROM ${table_name} WHERE ${column_name} = ? AND `;
     else
         query = `SELECT * FROM ${table_name} WHERE ${column_name} = ?`;
     return query
@@ -12,12 +12,14 @@ function getByIdQuery(table_name, column_name, isSoftDeletedRecord = false) {
 //     console.log("get query")
 //     let query;
 //     if(isSoftDeleted)
-//         query = `SELECT * FROM ${table_name} WHERE is_deleted = false`;
+//         query = `SELECT * FROM ${table_name} `;
 //     else
 //         query = `SELECT * FROM ${table_name} `;
 //     return query
 
 // }
+
+
 
 function getQuery(table_name, queryParams, isSoftDeleted = false) {
 
@@ -28,7 +30,7 @@ function getQuery(table_name, queryParams, isSoftDeleted = false) {
     // Initialize the query with the basic SELECT statement
     let query;
     if (isSoftDeleted)
-        query = `SELECT ${fields || '*'} FROM ${table_name} WHERE is_deleted = false`;
+        query = `SELECT ${fields || '*'} FROM ${table_name}`;
     else
         query = `SELECT ${fields || '*'} FROM ${table_name}`;
     // Check for search parameters
@@ -48,7 +50,7 @@ function getQuery(table_name, queryParams, isSoftDeleted = false) {
         }
         // Join the search conditions with AND and add to the query
         if (searchConditions.length > 0) {
-            query += `${isSoftDeleted ? " AND " : " WHERE "}${searchConditions.join(' AND ')}`;
+            query += `${isSoftDeleted ? " WHERE " : " WHERE "}${searchConditions.join(' AND ')}`;
         }
     }
 
@@ -72,7 +74,7 @@ function getQuery(table_name, queryParams, isSoftDeleted = false) {
 
 
 function softDeleteQuery(table_name, column_name) {
-    const query = `UPDATE ${table_name} SET is_deleted = true WHERE ${column_name} = ? `;
+    const query = `UPDATE ${table_name} SET WHERE ${column_name} = ? `;
     return query;
 }
 
@@ -84,7 +86,7 @@ function deleteQuery(table_name, column_name) {
 function updateQuery(table_name, column_name, columns, isSoftDeleted = false) {
     let query;
     if (isSoftDeleted)
-        query = `UPDATE ${table_name} SET ${columns} WHERE ${column_name} = ? AND is_deleted = false`;
+        query = `UPDATE ${table_name} SET ${columns} WHERE ${column_name} = ?`;
     else
         query = `UPDATE ${table_name} SET ${columns} WHERE ${column_name} = ?`;
 

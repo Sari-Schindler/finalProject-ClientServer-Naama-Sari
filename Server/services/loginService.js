@@ -3,10 +3,10 @@ import { getByIdQuery } from './querys.js'
 
 export class LoginService{
 
-    async login(username, password){
+    async login(UserName, password){
         try {
-            const query = getByIdQuery('access', 'username');
-            const [user] = await executeQuery(query, [username]);
+            const query = getByIdQuery('access', 'UserName');
+            const [user] = await executeQuery(query, [UserName]);
            // console.log('logged user', password, user.psw)
             //if (user && await bcrypt.compare(password, user.psw)) {
             if (user && password === user.psw) {
