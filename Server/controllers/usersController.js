@@ -7,10 +7,11 @@ export class UsersController {
             // const limit = res.query['limit']
             console.log("user service: ", req.query);
             const resultItems = await usersService.getUsers(req.query)
-                return res.status(200).json(resultItems);
+            return res.status(200).json(resultItems);
         }
         catch (ex) {
-            const err = {}
+            const err = {};
+            console.log('this is the error: ', ex);
             err.statusCode = 500;
             err.message = ex;
             next(err)
