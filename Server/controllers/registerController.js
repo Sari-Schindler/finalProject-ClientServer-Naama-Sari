@@ -2,7 +2,7 @@
 import { RegisterService } from "../services/registerService.js";
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
-//import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const registerService = new RegisterService();
 
@@ -18,7 +18,7 @@ export class RegisterController {
             if (existUsername.length || existEmail.length) {
                 return res.status(409).json({ message: "Username or Email already exists" });
             } else {
-                //await registerService.addUser({ ...req.body, psw: await bcrypt.hash(req.body.psw, 10) })
+                await registerService.addUser({ ...req.body, password: await bcrypt.hash(req.body.psw, 10) })
                 const response = await registerService.addUser(req.body)
                 req.body.id = response.body.insertId
                 const token = jwt.sign({  username: req.body.username, id: req.body.id, email: req.body.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
