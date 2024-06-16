@@ -4,16 +4,15 @@ import {getByIdQuery, getQuery, deleteQuery, updateQuery, createQuery, softDelet
 export class RegisterService {
 
     async getUsers(queryParams) {
-        const queryUser = getQuery('users',queryParams, true);
-        const result = await executeQuery(queryUser.query, queryUser.params);
-        return result;
+        const queryUser = getQuery('users',queryParams);
+        return await executeQuery(queryUser.query, queryUser.params);
     }
 
     async addUser(userItem) {
-        const queryUser = createQuery('users', "name, username, email, address, phone", "?,?,?,?,?");
-        const queryAccess = createQuery('access', "username, psw", "?,?");
-        const userResult =  await executeQuery(queryUser, [userItem.name, userItem.username, userItem.email, userItem.address, userItem.phone]);
-        const accessResult =  await executeQuery(queryAccess, [userItem.username, userItem.psw]);
+        const queryUser = createQuery('users', "type, name, username, email", "?,?,?,?");
+        const queryAccess = createQuery('access', "username, password", "?,?");
+        const userResult =  await executeQuery(queryUser, [userItem.type, userItem.name, userItem.username, userItem.email]);
+        const accessResult =  await executeQuery(queryAccess, [userItem.username, userItem.password]);
         return {userResult, accessResult};
 
     }
@@ -21,5 +20,5 @@ export class RegisterService {
 }
 
 
-const usersColumns = "name =?, userName =?, email=?, address=?, phone=?"
+const usersColumns = "type =?, name =?, username=?, email=?";
 

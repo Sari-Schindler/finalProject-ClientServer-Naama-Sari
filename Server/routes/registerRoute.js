@@ -1,7 +1,7 @@
 import express from "express";
-import { RegisterController } from '../../../side-to-side-app/server/controllers/registerController.js'
-import { validateUserData } from "../../../side-to-side-app/server/middleware/validationMiddleware.js";
-import { validate } from "../../../side-to-side-app/server/middleware/validationMiddleware.js";
+import { RegisterController } from "../controllers/registerController.js"
+import { validateUserData } from "../middleware/validationMiddleware.js";
+import { validate } from "../middleware/validationMiddleware.js";
 
 const registerRouter = express.Router();
 
