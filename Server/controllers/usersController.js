@@ -80,47 +80,10 @@ export class UsersController {
         }
     }
 
-    async getUsersAlbums(req, res, next){
-        try {
 
-            const resultItems = await usersService.getUsersAlbums(req.params.id)
-                return res.status(200).json(resultItems);
-        }
-        catch (ex) {
-            const err = {}
-            err.statusCode = 500;
-            err.message = ex;
-            next(err)
-        }
-    }
 
-    async getUsersPosts(req, res, next){
-        try {
 
-            const resultItems = await usersService.getUsersPosts(req.params.id)
-                return res.status(200).json(resultItems);
-        }
-        catch (ex) {
-            const err = {}
-            err.statusCode = 500;
-            err.message = ex;
-            next(err)
-        }
-    }
 
-    async getUsersTodos(req, res, next){
-        try {
-
-            const resultItems = await usersService.getUsersTodos(req.params.id)
-                return res.status(200).json(resultItems);
-        }
-        catch (ex) {
-            const err = {}
-            err.statusCode = 500;
-            err.message = ex;
-            next(err)
-        }
-    }
 
 
 }

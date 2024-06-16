@@ -1,4 +1,4 @@
-import { LoginService } from "../service/loginService.js";
+import { LoginService } from "../services/loginService.js";
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
@@ -14,8 +14,8 @@ export class LoginController{
             console.log(user);
             if (user) {
                 user = await loginService.getUserByUsername(username, user.id);
-                user=user[0];
-                console.log("token ssesion");
+                user = user[0];
+                console.log("token session");
                 console.log("Token payload:", {id:user.id, username: user.username, email:user.email});
                 const token = jwt.sign({id:user.id, username: user.username, email:user.email}, process.env.JWT_SECRET, { expiresIn: '1h' });
                 res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 259200000 });
