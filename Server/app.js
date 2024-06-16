@@ -18,8 +18,11 @@ app.use('/users', usersRouter);
 
 //app.use(logErrors);
 
-
-app.listen(8080, (err) => {
-    if (err) console.error(err);
-    console.log("Server listening on PORT", 8080);
+const port = process.env.PORT || 8080;
+app.listen(port, (err) => {
+    if (err) {
+        console.error(`Failed to start server: ${err}`);
+    } else {
+        console.log(`Server listening on port ${port}`);
+    }
 });

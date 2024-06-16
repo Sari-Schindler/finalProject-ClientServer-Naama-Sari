@@ -6,7 +6,7 @@ export class UsersController {
         try {
             // const limit = res.query['limit']
             console.log("user service: ", req.query);
-            const resultItems = await usersService.getUsers(req.query)
+            const resultItems = await usersService.getUsers()
             return res.status(200).json(resultItems);
         }
         catch (ex) {

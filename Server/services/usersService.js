@@ -3,9 +3,9 @@ import {getByIdQuery, getQuery, deleteQuery, updateQuery, createQuery} from './q
 
 export class UsersService {
 
-    async getUsers(queryParams) {
-        const queryUser = getQuery('users',queryParams);
-        const result = await executeQuery(queryUser.query, queryUser.params);
+    async getUsers() {
+        const queryUser = getQuery('users');
+        const result = await executeQuery(queryUser);
         return result;
     }
 
